@@ -1,6 +1,4 @@
 @import "tailwindcss";
 
-.content-items{
-    @apply flex flex-col p-2  shadow-[0_35px_35px_rgba(0,0,0,0.25)] rounded-2xl ;
 
-}
+

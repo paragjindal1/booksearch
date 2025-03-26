@@ -3,6 +3,7 @@ const search = document.querySelector(".searchbox");
 const submit = document.querySelector(".submit");
 const contentbox = document.querySelector(".contentbox");
 const sortbtn = document.querySelector(".sortbtn")
+const layoutbtn = document.querySelector(".layout")
 
 let books = [];
 
@@ -43,7 +44,7 @@ function bookdisplay(){
         console.log("working 2");
         
         let contentitem = document.createElement("div");
-        contentitem.classList.add("content-items");
+        contentitem.classList.add("content-items","flex" ,"flex-col" ,"p-2" , "shadow-[0_35px_35px_rgba(0,0,0,0.25)]", "rounded-2xl");
         contentitem.setAttribute("data-info",books[i].volumeInfo.infoLink)
         contentitem.innerHTML = ` <img class="rounded-2xl" src="${books[i].volumeInfo.imageLinks.thumbnail}" alt="">
            <div class="mt-2">
@@ -104,7 +105,7 @@ submit.addEventListener("click",()=>{
 
     result.forEach((res)=>{
         let contentitem = document.createElement("div");
-                contentitem.classList.add("content-items");
+                contentitem.classList.add("content-items","flex" ,"flex-col" ,"p-2" , "shadow-[0_35px_35px_rgba(0,0,0,0.25)]", "rounded-2xl");
                 contentitem.innerHTML = ` <img class="rounded-2xl" src="${res.volumeInfo.imageLinks.thumbnail}" alt="">
                    <div class="mt-2">
                     <label class="font-bold">Title -  </label>
@@ -126,6 +127,36 @@ submit.addEventListener("click",()=>{
 })
 
 
+layoutbtn.addEventListener("click", () => {
+    const contentitem = document.querySelectorAll(".content-items");
+
+    if (layoutbtn.innerText === "List") {
+        // Switch to Grid
+        contentbox.classList.add("grid", "grid-cols-1", "sm:grid-cols-2", "lg:grid-cols-3", "m-2.5");
+        contentbox.classList.remove("flex", "flex-col");
+
+        contentitem.forEach((item) => {
+            item.classList.remove("flex", "gap-10","flex-row","border-2");
+            item.classList.add("flex-col" ,"p-2","shadow-[0_35px_35px_rgba(0,0,0,0.25)]" )
+        });
+
+        layoutbtn.innerText = "Grid";
+    } else {
+        // Switch to List
+        contentbox.classList.remove("grid", "grid-cols-1", "sm:grid-cols-2", "lg:grid-cols-3", "m-2.5");
+        contentbox.classList.add("flex", "flex-col");
+
+        contentitem.forEach((item) => {
+            item.classList.remove("flex-col" ,"p-2","shadow-[0_35px_35px_rgba(0,0,0,0.25)]")
+            item.classList.add("gap-10","flex","border-2");
+            
+        });
+
+        layoutbtn.innerText = "List";
+    }
+});
+
+
 // sorting by tittle like display by a to z title
 sortbtn.addEventListener("click",()=>{
     removechild()
@@ -137,6 +168,7 @@ sortbtn.addEventListener("click",()=>{
 bookdisplay();
 
 console.log(books.length);
+console.log(layoutbtn);
 
 
 
