@@ -22,4 +22,9 @@
 
 ### Book Details Page
 - Clicking on a book item should open more details in a **new tab** using the `infoLink`.
-- 
+
+## Checking Detail
+
+###
+- Check only html and app.js file because other is only tailwing css resource
+  
